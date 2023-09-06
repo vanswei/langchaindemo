@@ -16,10 +16,10 @@ const suffix = "1.当输出的语句出现时间戳与相关时，必须转换�
 
 
 const model = new ChatOpenAI({
-  azureOpenAIApiKey: "072a09861f0d4737b06bee9566dc1aa6",
-  azureOpenAIApiInstanceName: "lyjs-ai",
-  azureOpenAIApiDeploymentName: "gpt-35-turbo",
-  azureOpenAIApiVersion: "2023-05-15", temperature: 0.2
+  azureOpenAIApiKey: "yourkey",
+  azureOpenAIApiInstanceName: "yourkey",
+  azureOpenAIApiDeploymentName: "yourkey",
+  azureOpenAIApiVersion: "yourkey", temperature: 0.2
 });
 
 const tools = [
