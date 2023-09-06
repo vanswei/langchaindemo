@@ -11,6 +11,9 @@ import { MessagesPlaceholder } from "langchain/prompts"
 import { BufferMemory } from "langchain/memory"
 
 const prefix = "1.你是一个乐于助人的智能客服，但是每条输出的语句必须有礼貌的使用中文回答 2.当输出有时间戳时必须转换成正常时间。"
+const suffix = "1.当输出的语句出现时间戳与相关时，必须转换成正常时间显示。2.设备状态的最晚登录时间早于最晚离线时间时判断为离线，否则判断为在线。"
+
+
 
 const model = new ChatOpenAI({
   azureOpenAIApiKey: "yourkey",
@@ -90,7 +93,8 @@ const executor = await initializeAgentExecutorWithOptions(tools, model, {
   agentArgs: {
     inputVariables: ["input", "agent_scratchpad", "chat_history"],
     memoryPrompts: [new MessagesPlaceholder("chat_history")],
-    prefix
+    prefix,
+    suffix
   },
 
 })
