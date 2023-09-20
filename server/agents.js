@@ -11,6 +11,18 @@ import { MessagesPlaceholder } from "langchain/prompts"
 import { BufferMemory } from "langchain/memory"
 
 
+import { Client } from "langsmith"
+import { LangChainTracer } from "langchain/callbacks"
+
+const client = new Client({
+  apiUrl: "https://api.smith.langchain.com",
+  apiKey: "yourkey"
+});
+
+const tracer = new LangChainTracer({
+  projectName: "your projectname",
+  client
+})
 
 const model = new ChatOpenAI({
   azureOpenAIApiKey: "yourkey",
@@ -98,9 +110,11 @@ const executor = await initializeAgentExecutorWithOptions(tools, model, {
 
 
 
+
 export async function agent(message) {
-  const res = await executor.call({
-    input: message,
+
+  const res = await executor.invoke({
+    input: message, timeout: 10000, callbacks: [tracer],
   })
 
   return res
